@@ -97,7 +97,7 @@ select
     booking_id,
     user_id,
     match_id,
-    coalesce(payment_status, 'Action Required') AS payment_status,
+    coalesce(payment_status, 'Action Required') AS systematic_status,
     total_cost
 from bookings
 where payment_status is null;
@@ -116,7 +116,7 @@ select u.user_id,u.full_name, b.booking_id
 -- Query 6: Find all ticket bookings where the total cost is strictly higher than the average cost of all ticket bookings
 select booking_id,match_id,total_cost 
   from bookings
-  where total_cost > (select avg(total_cost) from bookings)
+  where total_cost > (select avg(total_cost) from bookings);
 
  -- Query 7: Retrieve the top 2 most expensive matches sorted by base ticket price, skipping the absolute highest premium match.
 select match_id,fixture,base_ticket_price 
